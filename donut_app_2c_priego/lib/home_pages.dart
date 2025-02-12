@@ -15,9 +15,50 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         //icono izquierdo
         leading: Icon(Icons.menu, color: Colors.grey[800]),
-        actions: [Icon(Icons.person)],
+        actions: [Padding(
+          padding: const EdgeInsets.only(right: 24.0),
+          child: Icon(Icons.person),
+        )],
       ),
-      //Icono derecho
+
+      body: Column(
+        children: [
+          //texto princiál
+             Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 18),
+               child: Row(
+                 children: [
+                   Text("I want to ",style: TextStyle(fontSize: 32),),
+                   Text("Eat",
+                    style:
+                      TextStyle(
+                        //size
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+               
+                        //subrayado
+                        decoration: TextDecoration.underline,
+                      ))
+                 ],
+               ),
+             )
+            
+
+
+            //pdstañas
+
+
+
+            //contenido de pestañas
+
+
+            //carrito
+        ],
+        
+      ),
+   
+
+      
     );
   }
 }
