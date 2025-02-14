@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Remove this line to disable debug mode banner.
       title: 'Flutter Demo',
       theme: ThemeData(
-      
+        tabBarTheme: const TabBarTheme(indicatorColor: Colors.pink),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
