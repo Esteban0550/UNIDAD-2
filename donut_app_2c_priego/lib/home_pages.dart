@@ -1,18 +1,24 @@
 import 'package:donut_app_2c/tabs/burger_tab.dart';
-import 'package:donut_app_2c/tabs/donut_tab.dart';
-import 'package:donut_app_2c/tabs/pancakes_tab.dart';
-import 'package:donut_app_2c/tabs/pizza_tab.dart';
-import 'package:donut_app_2c/tabs/smoothie_tab.dart';
-import 'package:donut_app_2c/utils/my_tab.dart';
-import 'package:flutter/material.dart';
 
+import 'package:donut_app_2c/tabs/donut_tab.dart';
+
+import 'package:donut_app_2c/tabs/pancakes_tab.dart';
+
+import 'package:donut_app_2c/tabs/pizza_tab.dart';
+
+import 'package:donut_app_2c/tabs/smoothie_tab.dart';
+
+import 'package:donut_app_2c/utils/my_tab.dart';
+
+import 'package:flutter/material.dart';
+ 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
+ 
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
+ 
 class _HomePageState extends State<HomePage> {
   List<Widget> myTabs = [
     const MyTab(iconPath: 'lib/icons/donut.png'),
@@ -21,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     const MyTab(iconPath: 'lib/icons/pancakes.png'),
     const MyTab(iconPath: 'lib/icons/pizza.png')
   ];
-
+ 
   @override
   Widget build(BuildContext context) {
     //Icono izquierdo
@@ -63,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
+ 
             //Pestañas(TabBar)
             TabBar(tabs: myTabs),
             //Contenido de pestañas(TapBarView)
@@ -81,7 +87,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 1),
               child: Row(
-                //Esto alinea los elementos a los extremos
+                //Esto alinea los elementos a los extr
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Padding(
@@ -102,38 +108,24 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink[300],
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 12,
-                      ),
-                    ),
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          "View Cart",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.pink[300],
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12)),
+                      child: const Text(
+                        "View Cart",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ))
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),
     );
   }
 }
+ 
+ 
