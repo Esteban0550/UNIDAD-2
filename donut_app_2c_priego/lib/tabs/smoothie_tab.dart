@@ -2,45 +2,71 @@ import 'package:donut_app_2c/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
 
 class SmoothieTab extends StatelessWidget {
-  SmoothieTab({super.key});
-
+  final Function addToCart; // Recibimos la función addToCart
+ 
   // Lista de donas
-  final List<List<dynamic>> donutsOnSale = [
-    // [ donutFlavor, donutStore, donutPrice, donutColor, imageName ]
+  final List donutsOnSale = [
     [
-      "Ice Cream",
-      "Kryspy Kreme",
+      "Berry Smoothie",
+      "Jamba Juice",
       "36",
       Colors.blue,
-      "lib/images/icecream_donut.png"
+      "lib/images/Smoothie1.png"
     ],
     [
-      "Strawberry",
-      "Dunkin donuts",
+      "Mango Smoothie",
+      "Smoothie King",
       "45",
-      Colors.red,
-      "lib/images/strawberry_donut.png"
+      Colors.orange,
+      "lib/images/Smoothie2.png"
     ],
-    ["Grape Ape", "Aurrera", "84", Colors.purple, "lib/images/grape_donut.png"],
-    ["Choco", "Costco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
     [
-      "Ice Cream",
-      "Kryspy Kreme",
+      "Green Smoothie",
+      "Tropicana",
+      "84",
+      Colors.green,
+      "lib/images/Smoothie3.png"
+    ],
+    [
+      "Banana Smoothie",
+      "Starbucks",
+      "95",
+      Colors.yellow,
+      "lib/images/Smoothie4.png"
+    ],
+    [
+      "Strawberry Smoothie",
+      "Dunkin Donuts",
       "36",
-      Colors.blue,
-      "lib/images/icecream_donut.png"
+      Colors.red,
+      "lib/images/Smoothie5.png"
     ],
     [
-      "Strawberry",
-      "Dunkin donuts",
+      "Tropical Smoothie",
+      "Tropicana",
       "45",
-      Colors.red,
-      "lib/images/strawberry_donut.png"
+      Colors.purple,
+      "lib/images/Smoothie6.png"
     ],
-    ["Grape Ape", "Aurrera", "84", Colors.purple, "lib/images/grape_donut.png"],
-    ["Choco", "Costco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
+    [
+      "Pineapple Smoothie",
+      "Jamba Juice",
+      "84",
+      Colors.yellow,
+      "lib/images/Smoothie7.png"
+    ],
+    [
+      "Acai Smoothie",
+      "Smoothie King",
+      "95",
+      Colors.pink,
+      "lib/images/Smoothie8.png"
+    ],
   ];
-
+ 
+  // Constructor
+  SmoothieTab({super.key, required this.addToCart});
+ 
   @override
   Widget build(BuildContext context) {
     // Widget para usar cuadrícula
@@ -48,10 +74,9 @@ class SmoothieTab extends StatelessWidget {
       // Cuántos elementos hay en la cuadrícula
       itemCount: donutsOnSale.length,
       padding: EdgeInsets.all(12),
-      // Prepara 1. Cómo se distribuirán los elementos
+      // Distribución de los elementos
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        // Relación de aspecto (proporción)
         childAspectRatio: 1 / 1.6,
       ),
       itemBuilder: (context, index) {
@@ -62,6 +87,11 @@ class SmoothieTab extends StatelessWidget {
           donutPrice: donutsOnSale[index][2],
           donutColor: donutsOnSale[index][3],
           imageName: donutsOnSale[index][4],
+          onAddToCart: () {
+            // Llamamos a la función addToCart
+            addToCart(
+                donutsOnSale[index][0], double.parse(donutsOnSale[index][2]));
+          },
         );
       },
     );

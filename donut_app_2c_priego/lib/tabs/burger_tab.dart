@@ -2,45 +2,53 @@ import 'package:donut_app_2c/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
 
 class BurgerTab extends StatelessWidget {
-  BurgerTab({super.key});
-
+  final Function addToCart; // Recibimos la función addToCart
+ 
   // Lista de donas
-  final List<List<dynamic>> donutsOnSale = [
-    // [ donutFlavor, donutStore, donutPrice, donutColor, imageName ]
+  final List donutsOnSale = [
     [
-      "Ice Cream",
-      "Kryspy Kreme",
-      "36",
+      "Cheese Burger",
+      "McDonald's",
+      "50",
       Colors.blue,
-      "lib/images/icecream_donut.png"
+      "lib/images/Burger1.png"
     ],
     [
-      "Strawberry",
-      "Dunkin donuts",
-      "45",
+      "Veggie Burger",
+      "Burger King",
+      "55",
       Colors.red,
-      "lib/images/strawberry_donut.png"
+      "lib/images/Burger2.png"
     ],
-    ["Grape Ape", "Aurrera", "84", Colors.purple, "lib/images/grape_donut.png"],
-    ["Choco", "Costco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
+    ["BBQ Burger", "Five Guys", "60", Colors.purple, "lib/images/Burger3.png"],
+    ["Chicken Burger", "Wendy's", "65", Colors.brown, "lib/images/Burger4.png"],
     [
-      "Ice Cream",
-      "Kryspy Kreme",
-      "36",
-      Colors.blue,
-      "lib/images/icecream_donut.png"
+      "Double Cheeseburger",
+      "Shake Shack",
+      "70",
+      Colors.orange,
+      "lib/images/Burger5.png"
+    ],
+    ["Bacon Burger", "In-N-Out", "75", Colors.green, "lib/images/Burger6.png"],
+    [
+      "Mushroom Burger",
+      "Hardee's",
+      "80",
+      Colors.grey,
+      "lib/images/Burger7.png"
     ],
     [
-      "Strawberry",
-      "Dunkin donuts",
-      "45",
-      Colors.red,
-      "lib/images/strawberry_donut.png"
+      "Spicy Chicken Burger",
+      "Jack in the Box",
+      "85",
+      Colors.yellow,
+      "lib/images/Burger8.png"
     ],
-    ["Grape Ape", "Aurrera", "84", Colors.purple, "lib/images/grape_donut.png"],
-    ["Choco", "Costco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
   ];
-
+ 
+  // Constructor
+  BurgerTab({super.key, required this.addToCart});
+ 
   @override
   Widget build(BuildContext context) {
     // Widget para usar cuadrícula
@@ -48,10 +56,9 @@ class BurgerTab extends StatelessWidget {
       // Cuántos elementos hay en la cuadrícula
       itemCount: donutsOnSale.length,
       padding: EdgeInsets.all(12),
-      // Prepara 1. Cómo se distribuirán los elementos
+      // Distribución de los elementos
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        // Relación de aspecto (proporción)
         childAspectRatio: 1 / 1.6,
       ),
       itemBuilder: (context, index) {
@@ -62,6 +69,11 @@ class BurgerTab extends StatelessWidget {
           donutPrice: donutsOnSale[index][2],
           donutColor: donutsOnSale[index][3],
           imageName: donutsOnSale[index][4],
+          onAddToCart: () {
+            // Llamamos a la función addToCart
+            addToCart(
+                donutsOnSale[index][0], double.parse(donutsOnSale[index][2]));
+          },
         );
       },
     );
