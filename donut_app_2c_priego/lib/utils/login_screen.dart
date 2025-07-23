@@ -1,9 +1,8 @@
 import 'package:donut_app_2c/utils/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import '../utils/login_screen.dart'; // Ajustando la ruta de login_screen
-import '../home_pages.dart'; // Se ajustó a la estructura correcta
+import '../pages/home_pages.dart'; // Ajustando la ruta de home_pages.dart
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -54,32 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       } catch (e) {
-        String errorMessage = 'Ocurrió un error. Intenta de nuevo.';
-
-        if (e is FirebaseAuthException) {
-          switch (e.code) {
-            case 'user-not-found':
-              errorMessage = 'No existe una cuenta con este correo.';
-              break;
-            case 'wrong-password':
-              errorMessage = 'Contraseña incorrecta.';
-              break;
-            case 'email-already-in-use':
-              errorMessage = 'Este correo ya está registrado.';
-              break;
-            case 'invalid-email':
-              errorMessage = 'Formato de correo inválido.';
-              break;
-            case 'weak-password':
-              errorMessage = 'La contraseña es muy débil.';
-              break;
-            default:
-              errorMessage = 'Error de autenticación: ${e.message}';
-          }
-        }
-
         setState(() {
-          _errorMessage = errorMessage;
+          _errorMessage = e.toString(); // Mensaje genérico de error
         });
       } finally {
         setState(() {
@@ -182,6 +157,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 16),
+                      if (_errorMessage.isNotEmpty)
+                        Text(
+                          _errorMessage,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      const SizedBox(height: 16),
+                      if (_isLoading)
+                        const CircularProgressIndicator()
+                      else
+                        ElevatedButton(
+                          onPressed: _submitForm,
+                          child: Text(_isLogin ? 'Iniciar sesión' : 'Registrarse'),
+                        ),
                     ],
                   ),
                 ),

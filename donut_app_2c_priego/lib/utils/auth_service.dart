@@ -1,44 +1,42 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// auth_service.dart
+
+class MockUser {
+  final String email;
+
+  MockUser({required this.email});
+}
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  MockUser? _currentUser;
 
-  // Autenticación basada en cambios de stream
-  Stream<User?> get authStateChanges => _auth.authStateChanges();
+  // Stream simulado de autenticación
+  Stream<MockUser?> get authStateChanges async* {
+    yield _currentUser;
+  }
 
-  // Iniciar sesión con email y contraseña
-  Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
-    try {
-      return await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } catch (e) {
-      rethrow;
+  // Iniciar sesión simulado
+  Future<MockUser> signInWithEmailAndPassword(String email, String password) async {
+    // Aquí podrías validar con un backend real o simularlo
+    if (email.isNotEmpty && password == '123456') {
+      _currentUser = MockUser(email: email);
+      return _currentUser!;
+    } else {
+      throw Exception('Credenciales inválidas');
     }
   }
 
-  // Registrar con email y contraseña
-  Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
-    try {
-      return await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } catch (e) {
-      rethrow;
-    }
+  // Registrar simulado
+  Future<MockUser> registerWithEmailAndPassword(String email, String password) async {
+    // Simulación de registro
+    _currentUser = MockUser(email: email);
+    return _currentUser!;
   }
 
   // Cerrar sesión
   Future<void> signOut() async {
-    try {
-      await _auth.signOut();
-    } catch (e) {
-      rethrow;
-    }
+    _currentUser = null;
   }
 
-  // Obtener el usuario actual
-  User? get currentUser => _auth.currentUser;
+  // Obtener usuario actual
+  MockUser? get currentUser => _currentUser;
 }

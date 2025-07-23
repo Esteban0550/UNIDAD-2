@@ -1,4 +1,4 @@
-import 'package:donut_app_2c/home_pages.dart';
+import 'package:donut_app_2c/pages/home_pages.dart';
 import 'package:flutter/material.dart';
 
 void main() {
